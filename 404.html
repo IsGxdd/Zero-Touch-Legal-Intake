@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found | Zero-Touch Engine</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#000000',
+                        boneWhite: '#ffffff',
+                        electricIris: '#8052ff',
+                        saffronSpark: '#ffb829',
+                    },
+                    fontFamily: {
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-void text-boneWhite h-screen w-full flex flex-col items-center justify-center relative overflow-hidden font-display selection:bg-electricIris selection:text-boneWhite">
+
+    <!-- Ambient Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-electricIris rounded-full opacity-20 blur-[150px] -z-10 pointer-events-none"></div>
+
+    <div class="text-saffronSpark text-[14px] font-bold uppercase tracking-[0.35px] mb-4">Error 404</div>
+    <h1 class="text-[78px] md:text-[113px] leading-none tracking-[-3.12px] md:tracking-[-4.52px] mb-8 text-center px-4">Void reached.</h1>
+    
+    <a href="/" class="bg-electricIris text-boneWhite text-[14px] font-semibold uppercase tracking-[0.35px] rounded-[22.5px] px-[24px] py-[12px] hover:opacity-85 transition-opacity shadow-[0_0_20px_rgba(128,82,255,0.4)]">
+        Return to Engine
+    </a>
+
+</body>
+</html>

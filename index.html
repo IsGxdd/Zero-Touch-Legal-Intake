@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero-Touch Legal Intake | Dala Void</title>
+    
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="Zero-Touch Legal Intake Engine. Instantly convert unstructured case referrals into fully formatted relational case files.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="Zero-Touch Legal Intake | Automation Engine">
+    <meta property="og:description" content="Instantly convert unstructured case referrals into fully formatted relational case files.">
+    <meta property="og:image" content="https://yourdomain.com/social-preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourdomain.com/">
+    <meta property="twitter:title" content="Zero-Touch Legal Intake | Automation Engine">
+    <meta property="twitter:description" content="Instantly convert unstructured case referrals into fully formatted relational case files.">
+    <meta property="twitter:image" content="https://yourdomain.com/social-preview.png">
+
+    <!-- Favicon (Inline SVG for instant setup) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><polygon points=%2250,10 90,90 10,90%22 fill=%22%238052ff%22/></svg>">
+    
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics (Placeholder) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#000000',
+                        boneWhite: '#ffffff',
+                        ashGray: '#9a9a9a',
+                        silverMist: '#bdbdbd',
+                        electricIris: '#8052ff',
+                        saffronSpark: '#ffb829',
+                        deepVerdant: '#15846e',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+                    },
+                    letterSpacing: {
+                        display: '-4.52px',
+                        headingLg: '-3.12px',
+                        heading: '-1.68px',
+                        subheading: '-0.48px',
+                        nav: '0.35px'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    
+    <style>
+        body { 
+            background-color: #000000; /* Void */
+            color: #ffffff; /* Bone White */
+            margin: 0; 
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        ::-webkit-scrollbar { width: 0px; }
+        
+        /* Typography overrides */
+        .text-body-light {
+            font-family: 'Inter', sans-serif;
+            font-weight: 200;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #bdbdbd; 
+        }
+        @media (min-width: 768px) {
+            .text-body-light {
+                font-size: 18px;
+            }
+        }
+
+        /* 3D Hover Physics */
+        .impact-card {
+            background-color: rgba(25, 25, 25, 0.4); 
+            backdrop-filter: blur(20px);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .impact-card-content {
+            transform: translateZ(40px);
+            pointer-events: none;
+        }
+        
+        /* GSAP States */
+        .step-text { 
+            will-change: transform, opacity, filter; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            filter: blur(4px); 
+        }
+        .step-text-1 {
+            opacity: 1;
+            transform: translateY(0px);
+            filter: blur(0px);
+        }
+        .node-icon { will-change: transform, background-color, border-color, box-shadow; transition: all 0.5s ease-out; }
+
+        /* Blurry Doc Simulation */
+        .blur-line {
+            height: 12px;
+            background: rgba(154, 154, 154, 0.3);
+            border-radius: 4px;
+            margin-bottom: 12px;
+            filter: blur(2px);
+        }
+        
+        /* Checkbox styling */
+        .task-checkbox {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #9a9a9a;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .task-checkbox:checked {
+            background-color: #8052ff;
+            border-color: #8052ff;
+        }
+        .task-checkbox:checked::after {
+            content: "✓";
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-electricIris selection:text-boneWhite">
+
+    <!-- AMBIENT BLUR ORBS (Fixed Background) -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-electricIris rounded-full opacity-20 blur-[120px]"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-deepVerdant rounded-full opacity-20 blur-[120px]"></div>
+    </div>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full h-[60px] bg-void/50 backdrop-blur-xl z-50 border-b border-boneWhite/10 flex items-center justify-between px-4 md:px-8">
+        <div class="flex items-center gap-3">
+            <div class="w-4 h-4 bg-gradient-to-br from-electricIris to-deepVerdant transform rotate-45"></div>
+            <div class="text-boneWhite font-display font-semibold text-[14px] uppercase tracking-nav hidden sm:block">Dala Automation</div>
+        </div>
+        <div class="flex gap-4 md:gap-8 text-ashGray font-display text-[12px] md:text-[14px] font-semibold uppercase tracking-nav">
+            <a href="#pipeline" class="hover:text-boneWhite transition-colors no-underline">Pipeline</a>
+            <a href="#brain" class="hover:text-boneWhite transition-colors no-underline">Intelligence</a>
+            <a href="#impact" class="hover:text-boneWhite transition-colors no-underline hidden md:block">Impact</a>
+        </div>
+        <a href="#ask" class="bg-electricIris text-boneWhite text-[12px] md:text-[14px] font-semibold uppercase tracking-nav rounded-[22.5px] px-[12px] md:px-[16px] py-[8px] md:py-[10px] hover:opacity-85 transition-opacity no-underline shadow-[0_0_20px_rgba(128,82,255,0.3)] text-center whitespace-nowrap">Deploy</a>
+    </nav>
+
+    <!-- SECTION 1: THE HOOK (Hero Stage) -->
+    <section class="min-h-screen w-full flex flex-col justify-center items-center text-center px-6 bg-void/40 backdrop-blur-xl pt-24 pb-10">
+        <div class="max-w-5xl mx-auto flex flex-col items-center">
+            
+            <div class="text-saffronSpark font-display font-semibold text-[14px] uppercase tracking-nav mb-6">Zero-Touch Engine</div>
+            
+            <h1 class="font-display font-normal text-[56px] sm:text-[78px] md:text-[113px] leading-[1.0] tracking-display mb-10 text-boneWhite max-w-4xl">
+                Legal intake, <br/>instantaneously.
+            </h1>
+            
+            <!-- High Contrast Metric -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mt-4">
+                <div class="text-ashGray line-through font-display text-[32px] md:text-[42px] font-normal tracking-heading">20-30 Min</div>
+                <svg aria-hidden="true" class="w-8 h-8 md:w-10 md:h-10 text-ashGray rotate-90 md:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                <!-- Saffron Spark Signal -->
+                <div class="text-saffronSpark font-display text-[56px] sm:text-[78px] leading-none tracking-headingLg font-normal">&lt; 60 Sec</div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE PIPELINE (Scrollytelling) -->
+    <section id="pipeline" class="min-h-screen w-full flex flex-col items-center justify-center px-6 bg-void/40 backdrop-blur-xl relative py-20 z-10">
+        
+        <div class="text-center mb-8 md:mb-16">
+            <h2 class="font-display font-normal text-[48px] md:text-[78px] tracking-headingLg mb-4 text-boneWhite leading-[1.0]">The Pipeline.</h2>
+        </div>
+
+        <!-- Executive Stage -->
+        <div class="w-full max-w-5xl bg-void/60 rounded-[24px] border border-boneWhite/10 relative flex flex-col items-center p-6 md:p-12 h-[550px] md:h-[500px]">
+            
+            <!-- Text Container -->
+            <div class="relative w-full flex-1 flex justify-center items-start pt-4 md:pt-8">
+                
+                <!-- Step 1 -->
+                <div class="step-text step-text-1 absolute text-center w-full max-w-3xl">
+                    <h3 class="font-display font-normal text-[32px] md:text-[48px] tracking-heading mb-4 md:mb-6 text-boneWhite">Ingestion & Triage</h3>
+                    <p class="text-body-light">n8n continuously monitors <span class="text-boneWhite font-semibold">intake@lawfirm.com</span>. Raw emails and attachments are instantly extracted, structured, and pushed to Cloud Storage staging.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-text step-text-2 absolute text-center w-full max-w-3xl">
+                    <h3 class="font-display font-normal text-[32px] md:text-[48px] tracking-heading mb-4 md:mb-6 text-boneWhite">Intelligent Extraction</h3>
+                    <p class="text-body-light">The AI executes under strict <span class="text-boneWhite font-semibold">Zero-Hallucination Protocols</span>. Missing variables default to "Pending". Relational liability logic is instantly calculated.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-text step-text-3 absolute text-center w-full max-w-3xl">
+                    <h3 class="font-display font-normal text-[32px] md:text-[48px] tracking-heading mb-4 md:mb-6 text-boneWhite">Automated Provisioning</h3>
+                    <p class="text-body-light">An automated cascade executes directly into <span class="text-electricIris font-semibold">Filevine (v2)</span>. The engine creates the matter, uploads documents, and patches custom tabs.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-text step-text-4 absolute text-center w-full max-w-3xl">
+                    <h3 class="font-display font-normal text-[32px] md:text-[48px] tracking-heading mb-4 md:mb-6 text-boneWhite">Database Sync</h3>
+                    <p class="text-body-light">The system finalizes by generating a perfectly flat, scannable <span class="text-boneWhite font-semibold">Case Summary</span> across both Filevine activity feeds and Notion databases.</p>
+                </div>
+
+            </div>
+
+            <!-- Pipeline Nodes -->
+            <div class="w-full relative mt-auto flex justify-between items-center px-4 md:px-12 z-10 hidden sm:flex">
+                <!-- Background Line -->
+                <div class="absolute top-1/2 left-10 md:left-14 right-10 md:right-14 h-[1px] bg-boneWhite/20 -translate-y-1/2 z-0"></div>
+                <!-- Active Progress Line -->
+                <div class="progress-line absolute top-1/2 left-10 md:left-14 h-[1px] bg-electricIris -translate-y-1/2 z-0 w-0 shadow-[0_0_10px_#8052ff]"></div>
+
+                <!-- Node 1 -->
+                <div class="node-icon node-icon-1 relative z-10 w-[48px] h-[48px] md:w-[64px] md:h-[64px] rounded-full bg-void border border-electricIris flex items-center justify-center text-boneWhite scale-110 shadow-[0_0_20px_rgba(128,82,255,0.4)]">
+                    <svg aria-hidden="true" class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <!-- Node 2 -->
+                <div class="node-icon node-icon-2 relative z-10 w-[48px] h-[48px] md:w-[64px] md:h-[64px] rounded-full bg-void border border-boneWhite/20 flex items-center justify-center text-ashGray">
+                    <svg aria-hidden="true" class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                </div>
+                <!-- Node 3 -->
+                <div class="node-icon node-icon-3 relative z-10 w-[48px] h-[48px] md:w-[64px] md:h-[64px] rounded-full bg-void border border-boneWhite/20 flex items-center justify-center text-ashGray">
+                    <svg aria-hidden="true" class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+                <!-- Node 4 -->
+                <div class="node-icon node-icon-4 relative z-10 w-[48px] h-[48px] md:w-[64px] md:h-[64px] rounded-full bg-void border border-boneWhite/20 flex items-center justify-center text-ashGray">
+                    <svg aria-hidden="true" class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+            </div>
+            
+            <!-- Node Labels -->
+            <div class="w-full justify-between items-center px-4 md:px-12 mt-4 md:mt-6 font-display hidden sm:flex">
+                <span class="w-[48px] md:w-[64px] text-center text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-boneWhite label-1">Trigger</span>
+                <span class="w-[48px] md:w-[64px] text-center text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-ashGray label-2">Engine</span>
+                <span class="w-[48px] md:w-[64px] text-center text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-ashGray label-3">Filevine</span>
+                <span class="w-[48px] md:w-[64px] text-center text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-ashGray label-4">Notion</span>
+            </div>
+            
+            <!-- Mobile Step Indicator -->
+            <div class="w-full flex sm:hidden justify-center items-center mt-auto pb-4 text-electricIris font-display text-[12px] uppercase tracking-nav font-bold" id="mobile-step-indicator">
+                Step 1 of 4
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE BRAIN (Zero-Hallucination Demo) -->
+    <section id="brain" class="min-h-screen w-full flex flex-col items-center justify-center px-6 py-32 md:py-40 bg-void/40 backdrop-blur-xl overflow-hidden">
+        
+        <div class="text-center mb-12 md:mb-20 max-w-4xl">
+            <h2 class="font-display font-normal text-[48px] md:text-[78px] tracking-headingLg mb-4 md:mb-6 text-boneWhite leading-[1.0]">Zero-Hallucination.</h2>
+            <p class="text-body-light text-[18px] md:text-[24px]">Handcuffed to the truth. If it's not explicitly on the police report, it is marked "Pending".</p>
+        </div>
+
+        <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 h-auto md:h-[500px]">
+            
+            <!-- Left: Blurry Document -->
+            <div class="bg-void/60 rounded-[24px] border border-boneWhite/10 p-6 md:p-10 flex flex-col relative overflow-hidden h-[300px] md:h-auto">
+                <div class="text-ashGray font-display text-[10px] md:text-[12px] uppercase font-bold mb-6 md:mb-8 tracking-widest">Input: Unstructured Report</div>
+                
+                <!-- Simulated Blurry Text -->
+                <div class="blur-line w-full"></div>
+                <div class="blur-line w-11/12"></div>
+                <div class="blur-line w-4/5 mb-8"></div>
+                
+                <div class="blur-line w-full"></div>
+                <div class="blur-line w-full"></div>
+                <!-- Highlighted area where mismatch is detected -->
+                <div class="w-full md:w-3/4 h-12 border border-saffronSpark/50 rounded-[4px] bg-saffronSpark/10 flex items-center justify-center mb-8 relative">
+                    <div class="absolute inset-0 filter blur-[2px] bg-ashGray/30 rounded m-2"></div>
+                </div>
+                
+                <div class="blur-line w-5/6"></div>
+                <div class="blur-line w-1/2"></div>
+            </div>
+
+            <!-- Right: The Terminal Brain -->
+            <div class="bg-void/80 rounded-[24px] border border-boneWhite/10 p-6 md:p-10 relative overflow-hidden flex flex-col shadow-[inset_0_0_60px_rgba(0,0,0,0.5)] h-[350px] md:h-auto">
+                <div class="text-boneWhite font-display text-[10px] md:text-[12px] uppercase font-bold mb-6 tracking-widest flex justify-between">
+                    <span>Output: Structured Data</span>
+                    <span class="text-electricIris flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-electricIris animate-pulse"></div> Extracting</span>
+                </div>
+                
+                <!-- Typing Container -->
+                <div class="font-mono text-[12px] md:text-[14px] leading-[1.6] text-silverMist h-full overflow-hidden" id="typewriter">
+                    <!-- GSAP inserts text here -->
+                </div>
+
+                <!-- Liability Mitigation Badge -->
+                <div id="liability-badge" class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 bg-void border border-saffronSpark text-saffronSpark px-4 md:px-6 py-2 md:py-3 rounded-[22.5px] font-display font-semibold text-[12px] md:text-[14px] flex items-center gap-2 md:gap-3 shadow-[0_0_30px_rgba(255,184,41,0.2)] opacity-0 scale-90 whitespace-nowrap">
+                    <svg aria-hidden="true" class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    Driver/Owner Mismatch
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- SECTION 4: BUSINESS IMPACT (3D Hover Cards) -->
+    <section id="impact" class="min-h-screen w-full flex items-center justify-center px-6 py-32 md:py-40 bg-void/40 backdrop-blur-xl perspective-[1000px]">
+        <div class="max-w-6xl mx-auto w-full">
+            <h2 class="font-display font-normal text-[48px] md:text-[78px] tracking-headingLg mb-12 md:mb-24 text-center text-boneWhite">Impact.</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                
+                <!-- Card 1 -->
+                <div class="impact-card rounded-[24px] p-8 md:p-10 h-auto md:h-[340px] relative border border-boneWhite/10">
+                    <div class="impact-card-content flex flex-col h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-void border border-boneWhite/20 flex items-center justify-center mb-6 md:mb-8">
+                            <svg aria-hidden="true" class="w-5 h-5 text-boneWhite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="font-display text-[22px] md:text-[27px] text-boneWhite mb-3 md:mb-4 font-normal tracking-subheading">Data Integrity</h3>
+                        <p class="text-body-light">Strict "Pending" protocol eliminates human assumptions and standardizes missing information tracking.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="impact-card rounded-[24px] p-8 md:p-10 h-auto md:h-[340px] relative border border-boneWhite/10">
+                    <div class="impact-card-content flex flex-col h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-void border border-boneWhite/20 flex items-center justify-center mb-6 md:mb-8">
+                            <svg aria-hidden="true" class="w-5 h-5 text-saffronSpark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <h3 class="font-display text-[22px] md:text-[27px] text-boneWhite mb-3 md:mb-4 font-normal tracking-subheading">Scalability</h3>
+                        <p class="text-body-light">Frees the team from administrative transfer, allowing immediate focus on substantive legal work.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="impact-card rounded-[24px] p-8 md:p-10 h-auto md:h-[340px] relative border border-boneWhite/10">
+                    <div class="impact-card-content flex flex-col h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-void border border-boneWhite/20 flex items-center justify-center mb-6 md:mb-8">
+                            <svg aria-hidden="true" class="w-5 h-5 text-electricIris" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        </div>
+                        <h3 class="font-display text-[22px] md:text-[27px] text-boneWhite mb-3 md:mb-4 font-normal tracking-subheading">Standardization</h3>
+                        <p class="text-body-light">Builds on the foundation of the firm's SOP, digitizing verification workflows into a strict pipeline.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Fade Transition Spacer -->
+    <div class="w-full h-24 md:h-40 bg-gradient-to-b from-transparent to-boneWhite"></div>
+
+    <!-- SECTION 5: THE ASK (Filevine Setup) - Color Inversion -->
+    <section id="ask" class="py-20 md:py-32 w-full px-6 text-center flex flex-col items-center bg-boneWhite text-void">
+        
+        <div class="text-electricIris font-display text-[12px] md:text-[14px] font-bold mb-4 md:mb-6 tracking-nav uppercase">Action Required</div>
+        
+        <h2 id="ask-heading" class="font-display font-normal text-[48px] md:text-[78px] tracking-headingLg mb-4 md:mb-6 transition-colors duration-300">Initiate Engine.</h2>
+        <p id="ask-desc" class="font-sans font-normal text-[16px] md:text-[20px] max-w-3xl text-[#555555] mx-auto mb-12 md:mb-20 leading-relaxed transition-all duration-300">To turn the engine on and execute the API provisioning phase, a Filevine Account Admin must authorize the connection.</p>
+        
+        <div class="flex flex-col md:flex-row gap-6 md:gap-8 max-w-4xl w-full text-left">
+            
+            <!-- Form Validation: Checklist 1 -->
+            <label class="flex-1 bg-[#f5f5f7] p-6 md:p-10 rounded-[24px] border border-ashGray/20 cursor-pointer flex gap-4 md:gap-6 items-start hover:border-electricIris transition-colors focus-within:ring-2 focus-within:ring-electricIris">
+                <input type="checkbox" class="task-checkbox mt-1" aria-label="Create Service Account">
+                <div>
+                    <h3 class="font-display text-[20px] md:text-[24px] font-semibold text-void mb-2 md:mb-3">Service Account</h3>
+                    <p class="text-[14px] md:text-[15px] text-[#666666] leading-[1.6]">Navigate to Advanced > Service Accounts. Create "Automation" and grant All Permissions to authorize matter creation.</p>
+                </div>
+            </label>
+            
+            <!-- Form Validation: Checklist 2 -->
+            <label class="flex-1 bg-[#f5f5f7] p-6 md:p-10 rounded-[24px] border border-ashGray/20 cursor-pointer flex gap-4 md:gap-6 items-start hover:border-electricIris transition-colors focus-within:ring-2 focus-within:ring-electricIris">
+                <input type="checkbox" class="task-checkbox mt-1" aria-label="Generate PAT Token">
+                <div>
+                    <h3 class="font-display text-[20px] md:text-[24px] font-semibold text-void mb-2 md:mb-3">Generate PAT</h3>
+                    <p class="text-[14px] md:text-[15px] text-[#666666] leading-[1.6]">Generate a PAT Token with scopes: <code class="text-electricIris font-mono text-[12px] md:text-[13px] bg-void/5 px-1 rounded">tenant</code>, <code class="text-electricIris font-mono text-[12px] md:text-[13px] bg-void/5 px-1 rounded">filevine.v2.api.*</code>.</p>
+                </div>
+            </label>
+            
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="w-full py-12 md:py-16 bg-boneWhite flex flex-col items-center">
+        <div class="font-display text-[12px] md:text-[14px] uppercase tracking-nav font-semibold text-ashGray">The Law Office of</div>
+        <div class="font-display text-[20px] md:text-[24px] font-semibold text-void mt-2 tracking-subheading">Raphael A. Sanchez</div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-void/90 backdrop-blur-md border-t border-boneWhite/10 z-[100] px-6 py-4 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 translate-y-full transition-transform duration-500">
+        <p class="text-silverMist text-[12px] sm:text-[14px] font-sans font-extralight text-center sm:text-left">We use cookies to analyze site traffic and optimize the engine's performance.</p>
+        <div class="flex gap-4">
+            <button id="cookie-decline" class="text-ashGray text-[12px] sm:text-[14px] font-display font-semibold uppercase tracking-nav hover:text-boneWhite transition-colors">Decline</button>
+            <button id="cookie-accept" class="bg-electricIris text-boneWhite text-[12px] sm:text-[14px] font-display font-semibold uppercase tracking-nav rounded-[22.5px] px-[16px] py-[8px] hover:opacity-85 transition-opacity">Accept</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+        // ==========================================
+        // PINNED SCROLLYTELLING TIMELINE
+        // ==========================================
+        let pipelineTimeline = gsap.timeline();
+        
+        ScrollTrigger.create({
+            trigger: "#pipeline",
+            start: "center center",
+            end: "+=300%",
+            pin: true,
+            scrub: 1,
+            animation: pipelineTimeline
+        });
+
+        // Step 1 -> 2
+        pipelineTimeline
+          .to(".step-text-1", { opacity: 0, y: -20, filter: "blur(4px)", duration: 1 })
+          .to(".node-icon-1", { borderColor: "rgba(255,255,255,0.2)", backgroundColor: "#000000", color: "#9a9a9a", scale: 1, boxShadow: "none", duration: 1 }, "<")
+          .to(".label-1", { color: "#9a9a9a", duration: 1 }, "<")
+          .to(".progress-line", { width: "33.33%", duration: 1 }, "<")
+          .to(".node-icon-2", { borderColor: "#8052ff", backgroundColor: "#000000", color: "#ffffff", scale: 1.1, boxShadow: "0 0 20px rgba(128,82,255,0.4)", duration: 1 }, "<")
+          .to(".label-2", { color: "#ffffff", duration: 1 }, "<")
+          .fromTo(".step-text-2", { y: 20, opacity: 0, filter: "blur(4px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1 }, "<")
+          .call(() => { document.getElementById('mobile-step-indicator').textContent = "Step 2 of 4"; }, null, "<")
+
+        // Step 2 -> 3
+          .to(".step-text-2", { opacity: 0, y: -20, filter: "blur(4px)", duration: 1 })
+          .to(".node-icon-2", { borderColor: "rgba(255,255,255,0.2)", backgroundColor: "#000000", color: "#9a9a9a", scale: 1, boxShadow: "none", duration: 1 }, "<")
+          .to(".label-2", { color: "#9a9a9a", duration: 1 }, "<")
+          .to(".progress-line", { width: "66.66%", duration: 1 }, "<")
+          .to(".node-icon-3", { borderColor: "#8052ff", backgroundColor: "#000000", color: "#ffffff", scale: 1.1, boxShadow: "0 0 20px rgba(128,82,255,0.4)", duration: 1 }, "<")
+          .to(".label-3", { color: "#ffffff", duration: 1 }, "<")
+          .fromTo(".step-text-3", { y: 20, opacity: 0, filter: "blur(4px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1 }, "<")
+          .call(() => { document.getElementById('mobile-step-indicator').textContent = "Step 3 of 4"; }, null, "<")
+
+        // Step 3 -> 4
+          .to(".step-text-3", { opacity: 0, y: -20, filter: "blur(4px)", duration: 1 })
+          .to(".node-icon-3", { borderColor: "rgba(255,255,255,0.2)", backgroundColor: "#000000", color: "#9a9a9a", scale: 1, boxShadow: "none", duration: 1 }, "<")
+          .to(".label-3", { color: "#9a9a9a", duration: 1 }, "<")
+          .to(".progress-line", { width: "100%", duration: 1 }, "<")
+          .to(".node-icon-4", { borderColor: "#8052ff", backgroundColor: "#000000", color: "#ffffff", scale: 1.1, boxShadow: "0 0 20px rgba(128,82,255,0.4)", duration: 1 }, "<")
+          .to(".label-4", { color: "#ffffff", duration: 1 }, "<")
+          .fromTo(".step-text-4", { y: 20, opacity: 0, filter: "blur(4px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1 }, "<")
+          .call(() => { document.getElementById('mobile-step-indicator').textContent = "Step 4 of 4"; }, null, "<");
+          
+        // Reverse callbacks for mobile indicator
+        pipelineTimeline.eventCallback("onReverseComplete", () => { document.getElementById('mobile-step-indicator').textContent = "Step 1 of 4"; });
+
+        // ==========================================
+        // THE BRAIN (Zero-Hallucination Typing Demo)
+        // ==========================================
+        const markdownPayload = `{\n  "client": {\n    "firstName": "John",\n    "lastName": "Doe",\n    "ssn": "PENDING"\n  },\n  "adverse": {\n    "driver": "Jane Smith",\n    "owner": "Corp Inc"\n  },\n  "liability": {\n    "mismatch": true,\n    "pip_window": "Active"\n  }\n}`;
+        
+        let brainTriggered = false;
+        ScrollTrigger.create({
+            trigger: "#brain",
+            start: "top 60%",
+            onEnter: () => {
+                if(brainTriggered) return;
+                brainTriggered = true;
+                
+                // Typewriter effect
+                gsap.to("#typewriter", {
+                    text: { value: markdownPayload, preserveSpaces: true },
+                    duration: 3,
+                    ease: "none",
+                    onComplete: () => {
+                        gsap.to("#liability-badge", {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.6,
+                            ease: "back.out(1.7)"
+                        });
+                    }
+                });
+            }
+        });
+
+        // ==========================================
+        // 3D HOVER CARDS (Disable on Touch Devices)
+        // ==========================================
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.querySelectorAll('.impact-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const cx = rect.width / 2;
+                    const cy = rect.height / 2;
+                    
+                    const tiltX = ((y - cy) / cy) * -6; 
+                    const tiltY = ((x - cx) / cx) * 6;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(128,82,255,0.08) 0%, rgba(25,25,25,0.4) 60%)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    card.style.background = `rgba(25, 25, 25, 0.4)`;
+                });
+            });
+        }
+
+        // ==========================================
+        // FORM VALIDATION (The Ask Section)
+        // ==========================================
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const askHeading = document.getElementById('ask-heading');
+        const askDesc = document.getElementById('ask-desc');
+
+        checkboxes.forEach(box => {
+            box.addEventListener('change', () => {
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                if (allChecked) {
+                    askHeading.textContent = "Engine Authorized.";
+                    askHeading.classList.add('text-electricIris');
+                    askDesc.textContent = "The provisioning pipeline is now active. All inbound emails to intake@ralphsanchezlaw.com will be processed automatically.";
+                } else {
+                    askHeading.textContent = "Initiate Engine.";
+                    askHeading.classList.remove('text-electricIris');
+                    askDesc.textContent = "To turn the engine on and execute the API provisioning phase, a Filevine Account Admin must authorize the connection.";
+                }
+            });
+        });
+
+        // ==========================================
+        // COOKIE BANNER
+        // ==========================================
+        window.addEventListener('load', () => {
+            // Check if already accepted/declined (simulated)
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => {
+                    document.getElementById('cookie-banner').classList.remove('translate-y-full');
+                }, 1500);
+            }
+        });
+
+        document.getElementById('cookie-accept').addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookie-banner').classList.add('translate-y-full');
+        });
+
+        document.getElementById('cookie-decline').addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookie-banner').classList.add('translate-y-full');
+        });
+
+    </script>
+</body>
+</html>
