@@ -1,75 +1,63 @@
-# Zero-Touch Legal Intake Engine
+# ⚖️ AI-Powered Legal Intake Automation: Interactive Pitch Deck
 
-A cinematic, interactive frontend presentation designed to pitch an automated legal intake pipeline to executive management. 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Here-0071e3?style=for-the-badge)](https://stalwart-alfajores-bc2a9e.netlify.app/)
+[![Stack](https://img.shields.io/badge/Stack-HTML5%20%7C%20Tailwind%20%7C%20GSAP-111111?style=for-the-badge)](#)
+[![Status](https://img.shields.io/badge/Status-Roadmap_Proposal-ffb829?style=for-the-badge)](#)
 
-This project abandons standard presentation formats in favor of a "Scrollytelling" experience. It utilizes the premium **Dala Void** design system, high-end GSAP scroll physics, and interactive data visualization to prove the technical competence of an n8n-to-Filevine automation pipeline.
+This repository contains the source code for an interactive, cinematic "scrollytelling" web presentation. It was engineered to pitch a **Zero-Touch Legal Intake Automation Engine** to the management team at a personal injury and property damage law firm.
 
----
+## 📖 Project Overview
 
-## 🚀 Project Overview
+The objective of this presentation is to visually demonstrate the ROI and architectural flow of replacing manual legal data entry with an AI-driven n8n pipeline. 
 
-The goal of this presentation is to visually explain a complex backend API architecture (Email parsing -> AI Extraction -> Filevine Provisioning -> Notion Sync) using zero technical jargon. It translates backend operations into a buttery-smooth, interactive pipeline that executives can physically "scroll through."
+Instead of a static PowerPoint, this project utilizes a custom **"Dala Void" design system**—featuring absolute black canvases, ambient glassmorphism, aggressive typography, and GSAP ScrollTrigger physics—to make the executives *feel* the speed, precision, and modernity of the proposed software.
 
-### Key Features
-*   **The Dala Void Aesthetic:** A deep, saturated dark mode utilizing pure black (`#000000`) backgrounds, fixed ambient glowing orbs (`blur-[120px]`), and frosted glassmorphism overlays.
-*   **GSAP Scrollytelling:** A 4-step pipeline timeline perfectly synced to the user's scrollbar. As the user scrolls, the active nodes ignite with `electricIris` glows while the descriptive text swaps using slide-and-blur physics.
-*   **Zero-Hallucination Demo:** A split-screen interaction that simulates an AI processing a blurry unstructured police report into structured JSON in real-time.
-*   **3D Hover Physics:** Business impact cards that calculate cursor position to dynamically tilt on the X and Y axes while dragging a simulated radial glare across the card surface.
-*   **Production Ready:** Fully hardened with SEO metadata, Open Graph social preview tags, inline SVG favicons, mobile responsiveness, and cookie consent compliance.
+## 🎯 Intention & Roadmap Strategy
 
----
+This presentation serves as Step 1 in the automation deployment roadmap:
+1. **The Pitch (Current Stage):** Secure stakeholder approval and demonstrate the precise technical architecture to management.
+2. **The Ask:** Obtain authorization from the Filevine Tenant Admin to provision an Integration Service Account and generate a Personal Access Token (PAT).
+3. **Sandbox Testing:** Connect the Filevine API to the n8n staging environment to test API cascade logic with dummy data.
+4. **Live Deployment:** Connect the Outlook intake trigger to process historical, real-world Driver Exchanges and Crash Reports.
 
-## 🛠️ Technology & Languages
+## 🏢 Area of Usage & Applications
 
-This project was built to be completely serverless and dependency-free for instant, zero-build deployment.
+*   **Industry:** Legal Tech, Personal Injury, Property Damage Claims.
+*   **Operational Area:** Pre-claim verification, client intake, and data entry.
+*   **Primary Application:** Transforming unstructured emails and OCR'd Police Reports into structured, perfectly mapped variables inside **Filevine (v2)** and **Notion** databases.
 
-*   **Markup:** HTML5
-*   **Styling:** Tailwind CSS (via CDN with custom config tokens)
-*   **Animation Engine:** GSAP (GreenSock Animation Platform) + ScrollTrigger
-*   **Interactivity:** Vanilla JavaScript (ES6)
-*   **Typography:** Plus Jakarta Sans (Display) & Inter (Body)
+## 🛠️ Languages & Tech Stack
 
----
+### 1. The Presentation Codebase (This Repository)
+*   **HTML5 / JavaScript (ES6)**
+*   **Tailwind CSS (v3 via CDN):** Customized with specific design tokens (Void `#000000`, Electric Iris `#8052ff`, Saffron Spark `#ffb829`).
+*   **GSAP & ScrollTrigger:** For scroll-bound physics, pinned sections, and dynamic timeline scrubbing.
+*   **Typography:** Google Fonts (`Plus Jakarta Sans` for display, `Inter` for technical body text).
+*   **Hosting:** Netlify.
 
-## 📂 Organization & Architecture
+### 2. The Proposed Automation Engine
+*   **n8n:** Workflow orchestration, webhook listeners, and HTTP routing.
+*   **Google Gemini AI:** LLM parsing unstructured OCR data with strict "Zero-Hallucination" prompt guardrails.
+*   **Filevine API (v2):** `POST /v2/Projects`, `POST /v2/Documents` (via S3 Presigned URLs), `PATCH /v2/Projects/{id}/Form`.
+*   **Notion API:** Relational database synchronization for high-level team visibility.
+
+## 📂 Project Organization & Structure
+
+The single-page application is structured into 5 distinct narrative phases, tied to the user's scroll position:
 
 ```text
-├── index.html       # The core scrollytelling presentation and GSAP logic
-├── 404.html         # Custom Dala-themed error page with ambient void glows
-├── robots.txt       # SEO crawler indexing rules
-└── sitemap.xml      # Root sitemap for search engines
+├── Hero Section             # The Hook: "Zero-Touch Intake" (< 60 Sec metric)
+├── The Vision               # The current manual process vs. the automated future
+├── The Pipeline (GSAP)      # Pinned Scrollytelling: Ingestion -> AI -> Provisioning -> Sync
+├── Zero-Hallucination       # Split-screen UI demonstrating the strict "Pending" logic
+├── Business Impact          # ROI (Data Integrity, Risk Mitigation, Scalability)
+└── Action Required          # Footer Call-to-Action for Tenant Admin (PAT Generation)
 ```
 
----
+## 📚 Purposed Documentation & References
 
-## 🎯 Area of Usage & Applications
+*   [Filevine API v2 Documentation](https://developer.filevine.io/) - Core endpoints used for matter creation and form patching.
+*   [n8n Documentation](https://docs.n8n.io/) - Node-based workflow automation logic.
+*   [GSAP ScrollTrigger Docs](https://greensock.com/docs/v3/Plugins/ScrollTrigger) - Scrollytelling physics used in the presentation UI.
 
-This frontend architecture is designed for:
-1.  **Executive Buy-In:** Pitching highly technical backend workflows (like n8n, Zapier, or Make.com automations) to non-technical stakeholders or law firm partners.
-2.  **Product Landing Pages:** Serving as a high-conversion marketing page for LegalTech SaaS products.
-3.  **Interactive Portfolios:** Showcasing a developer's ability to combine complex API architecture with world-class, premium UI/UX.
-
----
-
-## 💻 Usage & Deployment
-
-### Local Development
-Because the project uses CDNs for its libraries, no package manager (`npm` or `yarn`) is required. 
-Simply double-click `index.html` to open it in any modern web browser.
-
-### Global Deployment
-This project is optimized for static hosting platforms. It requires **zero build steps**.
-
-1. **Netlify Drop (Fastest):** Drag and drop the project folder into [Netlify Drop](https://app.netlify.com/drop) to receive an instant live URL.
-2. **Vercel / GitHub Pages:** Push this repository to GitHub and connect it to Vercel. Vercel will instantly detect the `index.html` and deploy it to a global CDN, automatically forcing HTTPS and optimizing page load speeds.
-
----
-
-## 🎨 Design Tokens (Dala Void)
-
-For developers wishing to extend this project, the core Tailwind configuration relies on the following custom tokens:
-*   `void`: `#000000` (Backgrounds)
-*   `boneWhite`: `#ffffff` (Primary text)
-*   `electricIris`: `#8052ff` (Primary actions, glows, active states)
-*   `saffronSpark`: `#ffb829` (Warnings, badges)
-*   `deepVerdant`: `#15846e` (Ambient background gradients)
+*Designed & Engineered for The Law Office of Raphael A. Sanchez.*
